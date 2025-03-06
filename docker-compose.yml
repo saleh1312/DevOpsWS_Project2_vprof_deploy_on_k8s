@@ -1,0 +1,8 @@
+version: '3'
+services:
+  db01:
+    build: ./microservices/db01_data
+    container_name: db01
+    hostname: db01
+    ports:
+     - "3306:3306"
