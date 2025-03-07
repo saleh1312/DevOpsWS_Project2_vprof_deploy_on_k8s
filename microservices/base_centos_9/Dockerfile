@@ -1,0 +1,18 @@
+FROM quay.io/centos/centos:stream9
+
+RUN dnf -y install systemd procps-ng && dnf clean all
+RUN systemctl mask \
+    systemd-remount-fs.service \
+    dev-hugepages.mount \
+    sys-fs-fuse-connections.mount \
+    systemd-logind.service \
+    getty.target \
+    console-getty.service \
+    systemd-udev-trigger.service \
+    systemd-udevd.service \
+    systemd-random-seed.service \
+    systemd-machine-id-commit.service
+
+STOPSIGNAL SIGRTMIN+3
+
+CMD ["/sbin/init"]

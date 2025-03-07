@@ -1,13 +1,4 @@
-FROM centos
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the Bash script into the container
-COPY . /app/
-
-# Give execution permissions to the script
-RUN chmod +x /app/main.sh
-
-# Run the script when the container starts
-RUN /app/main.sh
+FROM mysql
+ENV MYSQL_ROOT_PASSWORD="admin123"
+ENV MYSQL_DATABASE="accounts"
+COPY db_backup.sql docker-entrypoint-initdb.d/db_backup.sql
